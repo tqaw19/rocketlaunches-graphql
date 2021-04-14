@@ -7,7 +7,7 @@ const typeDefs = gql`
         site: String
         mission: Mission
         rocket: Rocket
-        isBooked: Bollean!
+        isBooked: Boolean!
     }
 
     type Rocket {
