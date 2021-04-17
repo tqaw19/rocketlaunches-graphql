@@ -35,9 +35,28 @@ const typeDefs = gql`
 
   # Query available for the client side
   type Query {
-    launches: [Launch]!
+    launches (
+      """
+      The number of results to show must be > = 1. Default = 20
+      """
+      pageSize: Int
+      """
+      If you add a cursor here, it will only return results after this curosr
+      """
+      after: String
+    ): LaunchConnection!
     launch(id: ID!): Launch
     me: User
+  }
+
+  """
+    Simple wrapper around our list of launches that contains the lst item in the list
+    Pass this cursor to te launches query to fetch result after this.
+  """
+  type LaunchConnection {
+    cursor: String!
+    hasMore: Boolean!
+    launches: [Launch]!
   }
 
   # Mutation type for the client side
